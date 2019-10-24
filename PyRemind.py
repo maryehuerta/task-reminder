@@ -7,7 +7,7 @@ reminder_file = 'reminder_file.txt'
 
 def checkRenameFile():
     file_name = open(reminder_file, 'r')
-    script_template = Template('osascript -e \'display notification \"$notification\" with title \"ToDo List\"\'')
+    script_template = """osascript textToReminder.applescript"""
     today = time.strftime('%d%m%y')
     print("working")
     # Retrieve all tasks, not today tasks, and todays tasks
@@ -19,6 +19,7 @@ def checkRenameFile():
     updated_tasks = _process_tasks(tasks_today)
     _write_tasks_to_file(updated_tasks, 'reminder_file.txt', 'a')
     _create_todo_list(tasks_today)
+    os.system(script_template)
 
 
 def _write_tasks_to_file(tasks, file_name, writing_operation):
